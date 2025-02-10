@@ -40,7 +40,7 @@ public class MainController {
         List<Coordinate> path = algorithmsService.getNearestNeighbor(points);
         System.out.println(Arrays.deepToString(parseToIndexes(points, path)));
 
-        return Arrays.deepToString(parseToIndexes(points, path);
+        return parseToIndexes(points, path);
     }
 
     @PostMapping("/bruteForce")
@@ -52,6 +52,6 @@ public class MainController {
         List<Coordinate> path = algorithmsService.getBruteForce(points);
         System.out.println(Arrays.deepToString(parseToIndexes(points, path)));
 
-        return Arrays.deepToString(parseToIndexes(points, path);
+        return parseToIndexes(points, path);
     }
 }
