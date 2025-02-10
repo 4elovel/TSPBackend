@@ -97,6 +97,10 @@ public class AlgorithmsService {
         return totalDistance;
     }
 
+    //Man kann Euklidischer Abstand nutzen aber wir arbeiten mit latitude und longitude
+    //also diese Algoritmus ist genauer.
+    //Haversine formula
+    //https://en.wikipedia.org/wiki/Haversine_formula
     private double distance(Coordinate a, Coordinate b) {
         final double R = 6371;
         double lat1 = Math.toRadians(a.getLat());
