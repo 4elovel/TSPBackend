@@ -29,6 +29,51 @@ public class AlgorithmsService {
         return path;
     }
 
+    public List<Coordinate> getBruteForce(List<Coordinate> coordinates) {
+        if (coordinates.size() <= 1) {
+            return coordinates;
+        }
+        List<List<Coordinate>> permutations = generatePermutations(
+                coordinates.subList(1, coordinates.size()));
+        List<Coordinate> optimalPath = null;
+        double minDistance = Double.MAX_VALUE;
+
+        for (List<Coordinate> permutation : permutations) {
+            List<Coordinate> path = new ArrayList<>();
+            path.add(coordinates.get(0));
+            path.addAll(permutation);
+            double totalDistance = calculateTotalDistance(path);
+
+            if (totalDistance < minDistance) {
+                minDistance = totalDistance;
+                optimalPath = path;
+            }
+        }
+
+        return optimalPath;
+    }
+
+    private List<List<Coordinate>> generatePermutations(List<Coordinate> coordinates) {
+        List<List<Coordinate>> result = new ArrayList<>();
+        if (coordinates.size() == 1) {
+            result.add(new ArrayList<>(coordinates));
+            return result;
+        }
+
+        for (int i = 0; i < coordinates.size(); i++) {
+            Coordinate current = coordinates.get(i);
+            List<Coordinate> remaining = new ArrayList<>(coordinates);
+            remaining.remove(i);
+
+            List<List<Coordinate>> remainingPermutations = generatePermutations(remaining);
+            for (List<Coordinate> perm : remainingPermutations) {
+                perm.add(0, current);
+                result.add(perm);
+            }
+        }
+        return result;
+    }
+
     private Coordinate findClosestPoint(Coordinate currentPoint, List<Coordinate> remainingPoints) {
         Coordinate closestPoint = null;
         double minDistance = Double.MAX_VALUE;
@@ -55,6 +100,6 @@ public class AlgorithmsService {
     private double distance(Coordinate a, Coordinate b) {
         double latDiff = a.getLat() - b.getLat();
         double lngDiff = a.getLng() - b.getLng();
-        return Math.sqrt(latDiff * latDiff + lngDiff * lngDiff); // Euclidean distance
+        return Math.sqrt(latDiff * latDiff + lngDiff * lngDiff);
     }
 }

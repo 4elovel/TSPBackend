@@ -5,17 +5,14 @@ public class Coordinate {
     private double lat;
     private double lng;
 
-    // Default constructor for deserialization
     public Coordinate() {
     }
 
-    // Constructor
     public Coordinate(double lat, double lng) {
         this.lat = lat;
         this.lng = lng;
     }
 
-    // Getters and setters
     public double getLat() {
         return lat;
     }
