@@ -33,18 +33,18 @@ public class MainController {
     }
 
     @PostMapping("/nearestNeighbor")
-    public List<Coordinate> getNearestNeighbor(@RequestBody CoordinatesRequest coordinatesRequest) {
+    public int[][] getNearestNeighbor(@RequestBody CoordinatesRequest coordinatesRequest) {
         List<Coordinate> points = coordinatesRequest.getPoints();
         points.forEach(point -> System.out.println(
                 "Received: lat=" + point.getLat() + ", lng=" + point.getLng()));
         List<Coordinate> path = algorithmsService.getNearestNeighbor(points);
         System.out.println(Arrays.deepToString(parseToIndexes(points, path)));
 
-        return path;
+        return Arrays.deepToString(parseToIndexes(points, path);
     }
 
     @PostMapping("/bruteForce")
-    public List<Coordinate> getBruteForce(@RequestBody CoordinatesRequest coordinatesRequest) {
+    public int[][] getBruteForce(@RequestBody CoordinatesRequest coordinatesRequest) {
         List<Coordinate> points = coordinatesRequest.getPoints();
         points.forEach(point -> System.out.println(
                 "Received: lat=" + point.getLat() + ", lng=" + point.getLng()));
@@ -52,6 +52,6 @@ public class MainController {
         List<Coordinate> path = algorithmsService.getBruteForce(points);
         System.out.println(Arrays.deepToString(parseToIndexes(points, path)));
 
-        return path;
+        return Arrays.deepToString(parseToIndexes(points, path);
     }
 }
