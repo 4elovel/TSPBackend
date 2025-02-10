@@ -1,6 +1,7 @@
 package com.example.tspspringback.controller;
 
 import com.example.tspspringback.entity.Coordinate;
+import com.example.tspspringback.request.CoordinatesRequest;
 import com.example.tspspringback.service.AlgorithmsService;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ public class MainController {
             new Coordinate(48.151428143221224, 7.716175949788649),
             new Coordinate(49.224772722794825, 13.630724711901697)
     );
+
     AlgorithmsService algorithmsService = new AlgorithmsService();
 
     @GetMapping("/hello")
@@ -35,7 +37,10 @@ public class MainController {
     }
 
     @PostMapping("/nearestNeighbor")
-    public List<Coordinate> getNearestNeighbor(@RequestBody List<Coordinate> coordinates) {
-        return algorithmsService.getNearestNeighbor(coordinates);
+    public List<Coordinate> getNearestNeighbor(@RequestBody CoordinatesRequest coordinatesRequest) {
+        List<Coordinate> points = coordinatesRequest.getPoints();
+        points.forEach(point -> System.out.println(
+                "Received: lat=" + point.getLat() + ", lng=" + point.getLng()));
+        return algorithmsService.getNearestNeighbor(points);
     }
 }
