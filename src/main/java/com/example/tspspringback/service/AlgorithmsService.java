@@ -98,8 +98,22 @@ public class AlgorithmsService {
     }
 
     private double distance(Coordinate a, Coordinate b) {
-        double latDiff = a.getLat() - b.getLat();
-        double lngDiff = a.getLng() - b.getLng();
-        return Math.sqrt(latDiff * latDiff + lngDiff * lngDiff);
+        final double R = 6371;
+        double lat1 = Math.toRadians(a.getLat());
+        double lon1 = Math.toRadians(a.getLng());
+        double lat2 = Math.toRadians(b.getLat());
+        double lon2 = Math.toRadians(b.getLng());
+
+        double dlat = lat2 - lat1;
+        double dlon = lon2 - lon1;
+
+        double sinDlat = Math.sin(dlat / 2);
+        double sinDlon = Math.sin(dlon / 2);
+        double aVal = sinDlat * sinDlat + Math.cos(lat1) * Math.cos(lat2) * sinDlon * sinDlon;
+        double c = 2 * Math.atan2(Math.sqrt(aVal), Math.sqrt(1 - aVal));
+
+        double distance = R * c;
+
+        return distance;
     }
 }

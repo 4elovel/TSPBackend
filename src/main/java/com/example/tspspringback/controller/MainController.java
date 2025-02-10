@@ -37,6 +37,7 @@ public class MainController {
         List<Coordinate> points = coordinatesRequest.getPoints();
         points.forEach(point -> System.out.println(
                 "Received: lat=" + point.getLat() + ", lng=" + point.getLng()));
+        
         List<Coordinate> path = algorithmsService.getNearestNeighbor(points);
         System.out.println(Arrays.deepToString(parseToIndexes(points, path)));
 
